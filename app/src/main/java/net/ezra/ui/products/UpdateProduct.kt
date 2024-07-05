@@ -6,13 +6,22 @@ import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -23,7 +32,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -61,7 +69,7 @@ fun UpdateProductScreen(navController: NavController, productId: String, product
 
     updatedProductName = product.name
     updatedProductDescription = product.description
-    updatedProductPrice = product.price.toString()
+   // updatedProductPrice = product.price.toString()
     updatedProductImageUri = Uri.parse(product.imageUrl)
 
     val storage = FirebaseStorage.getInstance()
@@ -125,7 +133,7 @@ fun UpdateProductScreen(navController: NavController, productId: String, product
                 id = productId,
                 name = updatedProductName,
                 description = updatedProductDescription,
-                price = updatedProductPrice.toDouble(),
+              //  price = updatedProductPrice.toDouble(),
                 imageUrl = ""
             )
 

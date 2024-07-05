@@ -24,23 +24,20 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -59,7 +56,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import net.ezra.R
 import net.ezra.navigation.ROUTE_CHINA
@@ -67,13 +66,14 @@ import net.ezra.navigation.ROUTE_COLA
 import net.ezra.navigation.ROUTE_FLORIDA
 import net.ezra.navigation.ROUTE_HAWAII
 import net.ezra.navigation.ROUTE_HOME
+import net.ezra.navigation.ROUTE_LOGIN
 import net.ezra.navigation.ROUTE_MALDIVES
 import net.ezra.navigation.ROUTE_MOMBASA
 import net.ezra.navigation.ROUTE_MOROCCAN
 import net.ezra.navigation.ROUTE_PANDAWA
 import net.ezra.navigation.ROUTE_SANUR
-import net.ezra.navigation.ROUTE_SEARCH
 import net.ezra.navigation.ROUTE_SYCHELLES
+import net.ezra.navigation.ROUTE_VIEW_PROD
 
 
 data class Screen(val title: String, val icon: Int)
@@ -154,7 +154,7 @@ fun HomeScreen(navController: NavHostController) {
                     Row(
 
                     ) {
-                        Text(text = " Hi, Adventurer!", fontWeight = FontWeight.ExtraLight)
+                        Text(text = " Hi, Adventurer!", fontWeight = FontWeight.Light, fontSize = 12.sp)
 
                         Spacer(modifier = Modifier.width(230.dp))
 
@@ -169,26 +169,25 @@ fun HomeScreen(navController: NavHostController) {
 
                     Row {
                         Text(text = " Where are you going?", fontWeight = FontWeight.Bold)
+
                     }
 
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    Column {
+                        Text(text = " Explore", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+
+                        Spacer(modifier = Modifier.height(3.dp))
+
+                        Text(text = "  We hope you find what you", fontWeight = FontWeight.Light, fontSize = 15.sp)
+
+                        Text(text = "  came for", fontWeight = FontWeight.Light, fontSize = 15.sp)
 
 
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .padding(10.dp),
-                        value = search,
-                        // colors = OutlinedTextFieldDefaults.colors(
-                        // unfocusedBorderColor = Color.Red,
-                        // focusedBorderColor = Color.Green,
-                        // focusedLabelColor = Color.Green,
-                        // ),
-                        onValueChange = {search = it},
-                        label = { Text(text = "Search")},
-                        shape = RoundedCornerShape(15.dp),
+                    }
 
-                        )
-
-                    Spacer(modifier = Modifier.height(5.dp))
+                    
+                    Spacer(modifier = Modifier.height(10.dp))
 
 
                     Row {
@@ -814,7 +813,60 @@ fun HomeScreen(navController: NavHostController) {
 
                     }
 
-                    Spacer(modifier = Modifier.height(57.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    Button(
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF0B3FC0)),
+                        onClick = {
+                        navController.navigate(ROUTE_VIEW_PROD) {
+                            popUpTo(ROUTE_HOME) { inclusive = true }
+                        }
+                    },
+                        shape = RoundedCornerShape(50.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                            .height(50.dp),
+                        ) {
+                        Text(text = "MORE HERE", fontSize = 18.sp, textAlign = TextAlign.Center)
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    Button(onClick = {
+                        navController.navigate(ROUTE_LOGIN) {
+                            popUpTo(ROUTE_HOME) { inclusive = true }
+                        }
+                    },
+                        shape = RoundedCornerShape(50.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                            .height(50.dp),
+                    ) {
+                        Text(text = "LOGIN", fontSize = 18.sp, textAlign = TextAlign.Center)
+                    }
+
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                  /*  Button(
+                        onClick = {  //Temporal button to add destinations
+                        navController.navigate(ROUTE_ADD_PRODUCT) {
+                            popUpTo(ROUTE_HOME) { inclusive = true }
+                        }
+                    },
+                        shape = RoundedCornerShape(50.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                            .height(50.dp),
+                    ) {
+                        Text(text = "", fontSize = 18.sp, textAlign = TextAlign.Center)
+                    }
+                    */
+
+
+
 
 
 
@@ -874,7 +926,7 @@ fun HomeScreen(navController: NavHostController) {
 
 
 
-        bottomBar = { BottomBar(navController = navController) }
+      //  bottomBar = {BottomBar(navController = navController) }
 
 
 
@@ -929,7 +981,7 @@ fun AnimatedDrawer(isOpen: Boolean, onClose: () -> Unit) {
 
 
 
-
+/*
 @Composable
 fun BottomBar(navController: NavHostController) {
     val selectedIndex = remember { mutableStateOf(0) }
@@ -943,25 +995,10 @@ fun BottomBar(navController: NavHostController) {
         BottomNavigationItem(icon = {
             Icon(imageVector = Icons.Default.Home,"", tint = Color.White)
         },
-            label = { Text(text = "Home",color =  Color.White) }, selected = (selectedIndex.value == 0), onClick = {
-
-            })
-
-        BottomNavigationItem(icon = {
-            Icon(imageVector = Icons.Default.Favorite,"",tint = Color.White)
-        },
-            label = { Text(text = "Favorite",color =  Color.White) }, selected = (selectedIndex.value == 1), onClick = {
-
-            })
-
-        BottomNavigationItem(icon = {
-            Icon(imageVector = Icons.Default.Person, "",tint = Color.White)
-        },
             label = { Text(
-                text = "Students",
+                text = "Home",
                 color =  Color.White) },
-            selected = (selectedIndex.value == 2),
-            onClick = {
+            selected = (selectedIndex.value == 0), onClick = {
 
                 navController.navigate(ROUTE_SEARCH) {
                     popUpTo(ROUTE_HOME) { inclusive = true }
@@ -969,5 +1006,35 @@ fun BottomBar(navController: NavHostController) {
 
             })
 
+        BottomNavigationItem(icon = {
+            Icon(imageVector = Icons.Default.MoreVert,"",tint = Color.White)
+        },
+            label = { Text(
+                text = "More",
+                color =  Color.White) },
+            selected = (selectedIndex.value == 1), onClick = {
+
+                navController.navigate(ROUTE_VIEW_PROD) {
+                    popUpTo(ROUTE_HOME) { inclusive = true }
+                }
+
+            })
+
+        BottomNavigationItem(icon = {
+            Icon(imageVector = Icons.Default.Person, "",tint = Color.White)
+        },
+            label = { Text(
+                text = "Login",
+                color =  Color.White) },
+            selected = (selectedIndex.value == 2),
+            onClick = {
+
+                navController.navigate(ROUTE_LOGIN) {
+                    popUpTo(ROUTE_HOME) { inclusive = true }
+                }
+
+            })
+
     }
 }
+ */

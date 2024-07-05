@@ -7,35 +7,42 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.*
-import androidx.compose.ui.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import kotlinx.coroutines.tasks.await
-import net.ezra.navigation.ROUTE_ADD_PRODUCT
 import net.ezra.navigation.ROUTE_HOME
 import net.ezra.navigation.ROUTE_VIEW_PROD
-import java.util.*
+import java.util.UUID
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,13 +50,13 @@ import java.util.*
 fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
     var productName by remember { mutableStateOf("") }
     var productDescription by remember { mutableStateOf("") }
-    var productPrice by remember { mutableStateOf("") }
+   // var productPrice by remember { mutableStateOf("") }
     var productImageUri by remember { mutableStateOf<Uri?>(null) }
 
     // Track if fields are empty
     var productNameError by remember { mutableStateOf(false) }
     var productDescriptionError by remember { mutableStateOf(false) }
-    var productPriceError by remember { mutableStateOf(false) }
+   // var productPriceError by remember { mutableStateOf(false) }
     var productImageError by remember { mutableStateOf(false) }
 
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -62,7 +69,7 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = "Add Products", fontSize = 30.sp, color = Color.White)
+                    Text(text = "Add Destination", fontSize = 30.sp, color = Color.White)
                 },
                 navigationIcon = {
                     IconButton(onClick = {
@@ -76,7 +83,7 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xff0FB06A),
+                    containerColor = Color(0xff865C08),
                     titleContentColor = Color.White,
                 )
             )
@@ -85,7 +92,7 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0xff9AEDC9))
+                    .background(Color(0xff9C3607))
             ) {
                 item {
                     if (productImageUri != null) {
@@ -116,38 +123,38 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
                     TextField(
                         value = productName,
                         onValueChange = { productName = it },
-                        label = { Text("Product Name") },
+                        label = { Text("Destination Name") },
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     TextField(
                         value = productDescription,
                         onValueChange = { productDescription = it },
-                        label = { Text("Product Description") },
+                        label = { Text("Destination Description") },
                         modifier = Modifier.fillMaxWidth()
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    TextField(
-                        value = productPrice,
-                        onValueChange = { productPrice = it },
-                        label = { Text("Product Price") },
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        keyboardActions = KeyboardActions(onDone = { /* Handle Done action */ }),
-                        modifier = Modifier.fillMaxWidth()
-                    )
+//                    Spacer(modifier = Modifier.height(8.dp))
+//                    TextField(
+//                        value = productPrice,
+//                        onValueChange = { productPrice = it },
+//                        label = { Text("Product Price") },
+//                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+//                        keyboardActions = KeyboardActions(onDone = { /* Handle Done action */ }),
+//                        modifier = Modifier.fillMaxWidth()
+//                    )
                     Spacer(modifier = Modifier.height(16.dp))
 
                     if (productNameError) {
-                        Text("Product Name is required", color = Color.Red)
+                        Text("Destination Name is required", color = Color.Red)
                     }
                     if (productDescriptionError) {
-                        Text("Product Description is required", color = Color.Red)
+                        Text("Destination Description is required", color = Color.Red)
                     }
-                    if (productPriceError) {
-                        Text("Product Price is required", color = Color.Red)
-                    }
+//                    if (productPriceError) {
+//                        Text("Product Price is required", color = Color.Red)
+//                    }
                     if (productImageError) {
-                        Text("Product Image is required", color = Color.Red)
+                        Text("Image is required", color = Color.Red)
                     }
 
                     // Button to add product
@@ -156,24 +163,24 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
                             // Reset error flags
                             productNameError = productName.isBlank()
                             productDescriptionError = productDescription.isBlank()
-                            productPriceError = productPrice.isBlank()
+                            //productPriceError = productPrice.isBlank()
                             productImageError = productImageUri == null
 
                             // Add product if all fields are filled
-                            if (!productNameError && !productDescriptionError && !productPriceError && !productImageError) {
+                            if (!productNameError && !productDescriptionError &&  !productImageError) {
                                 addProductToFirestore(
                                     navController,
                                     onProductAdded,
                                     productName,
-                                    productDescription,
-                                    productPrice.toDouble(),
+                                    productDescription.toString(),
+                                    //productPrice.toDouble(),
                                     productImageUri
                                 )
                             }
                         },
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("Add Product")
+                        Text("Update")
                     }
                 }
             }
@@ -181,8 +188,8 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
     )
 }
 
-private fun addProductToFirestore(navController: NavController, onProductAdded: () -> Unit, productName: String, productDescription: String, productPrice: Double, productImageUri: Uri?) {
-    if (productName.isEmpty() || productDescription.isEmpty() || productPrice.isNaN() || productImageUri == null) {
+private fun addProductToFirestore(navController: NavController, onProductAdded: () -> Unit, productName: String, productDescription: String,  productImageUri: Uri?) {
+    if (productName.isEmpty() || productDescription.isEmpty() ||productImageUri == null) {
         // Validate input fields
         return
     }
@@ -193,7 +200,7 @@ private fun addProductToFirestore(navController: NavController, onProductAdded: 
     val productData = hashMapOf(
         "name" to productName,
         "description" to productDescription,
-        "price" to productPrice,
+       // "price" to productPrice,
         "imageUrl" to ""
     )
 
@@ -207,7 +214,7 @@ private fun addProductToFirestore(navController: NavController, onProductAdded: 
                         // Display toast message
                         Toast.makeText(
                             navController.context,
-                            "Product added successfully!",
+                            "Destination added successfully!",
                             Toast.LENGTH_SHORT
                         ).show()
 

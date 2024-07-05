@@ -6,10 +6,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -26,19 +26,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import coil.compose.rememberImagePainter
-import net.ezra.navigation.ROUTE_VIEW_PROD
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
-
-
+import net.ezra.navigation.ROUTE_VIEW_PROD
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -77,7 +74,7 @@ fun ProductDetailScreen(navController: NavController, productId: String) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xff0FB06A),
+                    containerColor = Color(0xFF056663),
                     titleContentColor = Color.White,
                 )
             )
@@ -86,18 +83,28 @@ fun ProductDetailScreen(navController: NavController, productId: String) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0xff9AEDC9)),
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Blue,          //blue
+                                Color.Yellow //yellow
+                            ),
+                            startY = 100f
+                        )
+                    ),
             ) {
                 product?.let {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Image(
                             painter = rememberAsyncImagePainter(it.imageUrl),
                             contentDescription = null,
-                            modifier = Modifier.size(60.dp)
+                            modifier = Modifier
+                                .size(350.dp)
+                                .fillMaxWidth()
                         )
                         Text(text = it.name, style = MaterialTheme.typography.h5)
                         Spacer(modifier = Modifier.height(8.dp))
-                        Text(text = "Price: ${it.price}", style = MaterialTheme.typography.subtitle1)
+                //        Text(text = "Price: ${it.price}", style = MaterialTheme.typography.subtitle1)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(text = it.description, style = MaterialTheme.typography.body1)
                     }

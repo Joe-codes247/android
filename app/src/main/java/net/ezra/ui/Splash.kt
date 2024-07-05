@@ -5,7 +5,8 @@ import android.content.res.Configuration
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,7 +21,6 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 import net.ezra.R
 import net.ezra.navigation.ROUTE_HOME
-
 
 
 @Composable
@@ -52,12 +52,12 @@ fun SplashScreen(navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ){
 
-        Image(painter = painterResource(id = R.drawable.logo),
+        Image(painter = painterResource(id = R.drawable.tlogo),
             contentDescription = "Logo",
             modifier = Modifier.scale(scale.value)
         )
 
-        Text("Apen Softwares")
+        Text("")
 
 
 
