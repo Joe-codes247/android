@@ -44,7 +44,6 @@ import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import net.ezra.R
 import net.ezra.navigation.ROUTE_ADD_PRODUCT
-import net.ezra.navigation.ROUTE_HOME
 import net.ezra.navigation.ROUTE_LOGIN
 import net.ezra.navigation.ROUTE_REGISTER
 
@@ -132,7 +131,7 @@ fun LoginScreen(navController: NavController, onLoginSuccess: () -> Unit) {
 
 
             Button(
-                colors = ButtonDefaults.buttonColors(Color(0xff0FB06A)),
+                colors = ButtonDefaults.buttonColors(Color(0xFF009688)),
                 onClick = {
                     if (email.isBlank() || password.isBlank()) {
                         error = "Please fill in all fields"
@@ -142,7 +141,7 @@ fun LoginScreen(navController: NavController, onLoginSuccess: () -> Unit) {
                             .addOnCompleteListener { task ->
                                 isLoading = false
                                 if (task.isSuccessful) {
-                                    navController.navigate(ROUTE_HOME)
+                                    navController.navigate(ROUTE_ADD_PRODUCT)
                                 } else {
                                     error = task.exception?.message ?: "Login failed"
                                 }
@@ -160,7 +159,6 @@ fun LoginScreen(navController: NavController, onLoginSuccess: () -> Unit) {
 
             androidx.compose.material3.Text(
                 modifier = Modifier
-
                     .clickable {
                         navController.navigate(ROUTE_REGISTER) {
                             popUpTo(ROUTE_LOGIN) { inclusive = true }

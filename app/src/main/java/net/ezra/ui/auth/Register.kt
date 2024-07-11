@@ -143,7 +143,7 @@ fun SignUpScreen(navController: NavController, onSignUpSuccess: () -> Unit) {
             CircularProgressIndicator(modifier = Modifier.size(48.dp))
         } else {
             Button(
-                colors = ButtonDefaults.buttonColors(Color(0xff0FB06A)),
+                colors = ButtonDefaults.buttonColors(Color(0xFF009688)),
                 onClick = {
                     if (email.isBlank()){
                             error = "Email is required"
@@ -174,7 +174,6 @@ fun SignUpScreen(navController: NavController, onSignUpSuccess: () -> Unit) {
 
             androidx.compose.material3.Text(
                 modifier = Modifier
-
                     .clickable {
                         navController.navigate(ROUTE_LOGIN) {
                             popUpTo(ROUTE_REGISTER) { inclusive = true }

@@ -123,7 +123,7 @@ fun ProductListScreen(navController: NavController, products: List<Product>) {
                         contentAlignment = Alignment.Center
                     ) {
                         CircularProgressIndicator(progress = progress / 100f)
-                        Text(text = "Loading... $progress%", fontSize = 20.sp)
+                        Text(text = "Displaying Destinations...", fontSize = 20.sp)
                     }
                 } else {
                     if (productList.isEmpty()) {
@@ -173,7 +173,7 @@ fun ProductListItem(product: Product, onItemClick: (String) -> Unit) {
                 painter = rememberImagePainter(product.imageUrl),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(60.dp)
+                    .size(80.dp)
             )
 
             Spacer(modifier = Modifier.width(16.dp))

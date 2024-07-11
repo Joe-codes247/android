@@ -20,6 +20,7 @@ import net.ezra.ui.products.ProductDetailScreen
 import net.ezra.ui.products.ProductListScreen
 import net.ezra.ui.screens.ChinaScreen
 import net.ezra.ui.screens.ColaScreen
+import net.ezra.ui.screens.FavoriteScreen
 import net.ezra.ui.screens.FloridaScreen
 import net.ezra.ui.screens.HawaiiScreen
 import net.ezra.ui.screens.MaldivesScreen
@@ -125,6 +126,9 @@ fun AppNavHost(
             ColaScreen(navController = navController)
         }
 
+        composable(ROUTE_FAVORITE) {
+            FavoriteScreen(navController = navController)
+        }
 
         composable(ROUTE_CHINA) {
             ChinaScreen(navController = navController)

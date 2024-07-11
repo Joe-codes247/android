@@ -22,6 +22,7 @@ const val ROUTE_HAWAII = "hawaii"
 const val ROUTE_MOROCCAN = "moroccan"
 const val ROUTE_CHINA = "china"
 const val ROUTE_COLA = "cola"
+const val ROUTE_FAVORITE = "favorite"
 
 
 

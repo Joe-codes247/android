@@ -35,7 +35,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -63,6 +63,7 @@ import androidx.navigation.NavHostController
 import net.ezra.R
 import net.ezra.navigation.ROUTE_CHINA
 import net.ezra.navigation.ROUTE_COLA
+import net.ezra.navigation.ROUTE_FAVORITE
 import net.ezra.navigation.ROUTE_FLORIDA
 import net.ezra.navigation.ROUTE_HAWAII
 import net.ezra.navigation.ROUTE_HOME
@@ -159,9 +160,14 @@ fun HomeScreen(navController: NavHostController) {
                         Spacer(modifier = Modifier.width(230.dp))
 
                         Icon(
-                            imageVector = Icons.Default.Notifications,
+                            imageVector = Icons.Default.Favorite,
                             contentDescription = "",
                             modifier = Modifier
+                                .clickable {
+                                    navController.navigate(ROUTE_FAVORITE) {
+                                        popUpTo(ROUTE_HOME) { inclusive = true }
+                                    }
+                                }
                                 .size(20.dp),
 
                             )
@@ -849,7 +855,8 @@ fun HomeScreen(navController: NavHostController) {
 
                     Spacer(modifier = Modifier.height(5.dp))
 
-                  /*  Button(
+                    /*
+                    Button(
                         onClick = {  //Temporal button to add destinations
                         navController.navigate(ROUTE_ADD_PRODUCT) {
                             popUpTo(ROUTE_HOME) { inclusive = true }
@@ -863,7 +870,9 @@ fun HomeScreen(navController: NavHostController) {
                     ) {
                         Text(text = "", fontSize = 18.sp, textAlign = TextAlign.Center)
                     }
-                    */
+                     */
+
+
 
 
 

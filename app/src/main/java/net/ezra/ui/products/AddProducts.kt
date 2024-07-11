@@ -32,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -43,6 +44,7 @@ import com.google.firebase.storage.ktx.storage
 import net.ezra.navigation.ROUTE_HOME
 import net.ezra.navigation.ROUTE_VIEW_PROD
 import java.util.UUID
+
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -83,7 +85,7 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xff865C08),
+                    containerColor = Color(0xFF00BCD4),
                     titleContentColor = Color.White,
                 )
             )
@@ -92,7 +94,15 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0xff9C3607))
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Blue,
+                                Color.Yellow
+                            ),
+                            startY = 100f
+                        )
+                    )
             ) {
                 item {
                     if (productImageUri != null) {
